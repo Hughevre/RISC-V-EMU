@@ -78,8 +78,8 @@ void F_JAL(void) {
 
     printf("0x%08x: JAL RD%d, IMM%d\n", getPC(), RD, IMM);
 
-    setRegister(RD, getPC()+1);     // pc+4 bajty (długość słowa)
-    setPC(getPC()+(IMM/4));         // trzeba chyba zmienić sposób adresowania PC na 4 na skok
+    setRegister(RD, getPC() + 1);     // pc+4 bajty (długość słowa)
+    setPC(getPC() + (IMM / 4));         // trzeba chyba zmienić sposób adresowania PC na 4 na skok
 }
 
 void F_JALR(void) {
@@ -91,8 +91,8 @@ void F_JALR(void) {
 
     printf("0x%08x: JALR RD%d, RS1%d, IMM%d\n", getPC(), RD, RS1, IMM);
 
-    setRegister(RD, getPC()+1);
-    setPC(getPC()+IMM/2);
+    setRegister(RD, getPC() + 1);
+    setPC(getPC() + ((RS1 + IMM) & 0xFFFFFFFE) / 4);
 }
 
 void F_BEQ(void) {
@@ -121,9 +121,9 @@ void F_LW(void) {
 
     printf("0x%08x: LW RD%d, RS1%d, IMM%d\n", getPC(), RD, RS1, IMM);
 
-    AddressType T = IMM + getRegister(RS1);
+    AddressType MEM = IMM + getRegister(RS1);
 
-    setRegister(RD, getMEMD(T));
+    setRegister(RD, getMEMD(MEM));
 
     incPC();
 }
@@ -138,9 +138,9 @@ void F_SW(void) {
 
     printf("0x%08x: SW RS1%d, RS2%d, IMM%d\n", getPC(), RS1, RS2, IMM);
 
-    AddressType T = IMM + getRegister(RS1);
+    AddressType MEM = IMM + getRegister(RS1);
 
-    setMEMD(T, getRegister(RS2));
+    setMEMD(MEM, getRegister(RS2));
 
     incPC();
 }
@@ -155,9 +155,9 @@ void F_SB(void) {
 
     printf("0x%08x: SB RS1%d, RS2%d, IMM%d\n", getPC(), RS1, RS2, IMM);
 
-    AddressType T = IMM + getRegister(RS1);
+    AddressType MEM = IMM + getRegister(RS1);
 
-    setMEMD(T, getRegister(RS2) & 0xFF);        // 8-bitów
+    setMEMD(MEM, getRegister(RS2) & 0xFF);        // 8-bitów
 
     incPC();
 }
