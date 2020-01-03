@@ -29,7 +29,7 @@ void AUIPC() {
 	DWord	imm = (loadCodeWord(getPC()) & 0xFFFFF000) >> 12;         // imm[31:12]
 	Byte	rd	= getRD();
 
-	printf("0x%08x: AUIPC RD%d, IMM%d\n", getPC(), rd, imm);
+	printf("0x%08x: AUIPC RD:%d, IMM:%d\n", getPC(), rd, imm);
 
 	setRegister(rd, (DWord)(imm + getPC()));
 

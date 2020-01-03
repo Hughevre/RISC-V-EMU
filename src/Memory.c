@@ -90,3 +90,14 @@ Byte getRD() {
 	return (loadCodeWord(getPC()) & 0x00000F80) >> 7;
 }
 
+Byte getOpCode(DWord comm) {
+	return comm & 0x0000007F;
+}
+
+Byte getFunct3(DWord comm) {
+	return comm & 0x00007000;
+}
+
+Byte getFunct7(DWord comm) {
+	return comm & 0xFE000000;
+}

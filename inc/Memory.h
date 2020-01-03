@@ -66,4 +66,8 @@ Byte		getRS1();
 Byte		getRS2();
 Byte		getRD();
 
+Byte		getOpCode(DWord);
+Byte		getFunct3(DWord);
+Byte		getFunct7(DWord);
+
 #endif 
