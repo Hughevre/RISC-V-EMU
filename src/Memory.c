@@ -1,7 +1,7 @@
 ﻿#include "Memory.h"
 
-DWord g_codeSpace[CODE_SIZE];
-DWord g_dataSpace[DATA_SIZE];
+DWord	g_codeSpace[CODE_SIZE];
+SDWord	g_dataSpace[DATA_SIZE];
 Registers reg;
 
 void throwMemoryException(DWord i, DWord j) {
@@ -12,13 +12,13 @@ void throwMemoryException(DWord i, DWord j) {
 }
 
 bool isCodeAddressInRange(Address addr) {
-	if (addr > CODE_TOP)
+	if (addr < CODE_BASE && addr > CODE_TOP)
 		return false;
 	return true;
 }
 
 bool isDataAddressInRange(Address addr) {
-	if (addr > DATA_TOP)
+	if (addr < DATA_BASE && addr > DATA_TOP)
 		return false;
 	return true;
 }
@@ -29,10 +29,20 @@ DWord loadCodeWord(Address addr) {
 	return g_codeSpace[addr];
 }
 
-DWord loadDataWord(Address addr) {
+SDWord loadDataWord(Address addr) {
 	if (!isDataAddressInRange(addr))
 		throwMemoryException(OUT_OF_DATA_MEMORY_SPACE_ERROR, addr);
 	return g_dataSpace[addr];
+}
+
+void storeDataWord(Address addr, SDWord val) {
+	if (!isDataAddressInRange(addr))
+		throwMemoryException(OUT_OF_DATA_MEMORY_SPACE_ERROR, addr);
+	g_dataSpace[addr] = val;
+}
+
+Address getPC() {
+	return reg.PC;
 }
 
 void setPC(Address addr) {
@@ -41,29 +51,30 @@ void setPC(Address addr) {
 	reg.PC = addr;
 }
 
-Address getPC() {
-	return reg.PC;
-}
-
 void incPC() {
 	if (reg.PC == CODE_TOP)
 		throwMemoryException(INSTRUCTION_POINTER_OVERFLOW, reg.PC);
-	reg.PC += 4;
+	reg.PC += 1;
 }
 
-DWord getRegister(Byte n) {
+SDWord getRegister(Byte n) {
 	if (n > REGISTERS_NO)
 		throwMemoryException(INVALID_REGISTER_GET, n);
 	return reg.rX[n];
 }
 
-void setRegister(Byte n, DWord value) {
+void setRegister(Byte n, SDWord value) {
 	if (n > REGISTERS_NO)
 		throwMemoryException(INVALID_REGISTER_SET, n);
 	reg.rX[n] = value;
 }
 
-//
+DWord getFlag(DWord val) {
+	if (val > sizeof(DWord))            
+		throwMemoryException(INVALID_GET_OF_FLAGS_BIT, val);
+	return reg.flags & (1 << val);
+}
+
 //
 //
 
