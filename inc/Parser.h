@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "Debug.h"
 
-int parse_file(const char*, void*, size_t);
+int readMemory(const char*, void*, size_t);
+int saveMemory(const char*, void*, size_t);
 
 #endif
