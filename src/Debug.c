@@ -1,4 +1,4 @@
-#include "Debug.h"
+#include "../inc/Debug.h"
 
 void setDebugLevel(DebugVerboseLevel level) {
 	RF = level;

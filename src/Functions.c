@@ -1,4 +1,4 @@
-#include "Functions.h"
+#include "../inc/Functions.h"
 
 void ADDI() {
 	Byte	rs1 = getRS1();
@@ -72,8 +72,8 @@ void JAL() {
 
 	printf("0x%08x: JAL RD:%d, IMM:%d\n", getPC(), rd, imm);
 
-	setRegister(rd, getPC() + 1);     // pc+4 bajty (d³ugoœæ s³owa)
-	setPC(getPC() + (imm / 4));         // trzeba chyba zmieniæ sposób adresowania PC na 4 na skok
+	setRegister(rd, getPC() + 1);     // pc+4 bajty (dï¿½ugoï¿½ï¿½ sï¿½owa)
+	setPC(getPC() + (imm / 4));         // trzeba chyba zmieniï¿½ sposï¿½b adresowania PC na 4 na skok
 }
 
 void JALR() {
@@ -151,7 +151,7 @@ void SB() {
 
 	Address addr = imm + getRegister(rs1);
 
-	storeDataWord(addr, getRegister(rs2) & 0xFF);        // 8-bitów
+	storeDataWord(addr, getRegister(rs2) & 0xFF);        // 8-bitï¿½w
 
 	incPC();
 }

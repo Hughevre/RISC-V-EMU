@@ -1,4 +1,4 @@
-﻿#include "Memory.h"
+﻿#include "../inc/Memory.h"
 
 DWord	g_codeSpace[CODE_SIZE];
 SDWord	g_dataSpace[DATA_SIZE];

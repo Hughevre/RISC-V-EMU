@@ -1,4 +1,4 @@
-#include "Parser.h"
+#include "../inc/Parser.h"
 
 int readStream(FILE *fp, void *buffer, size_t size) {
 	const uint8_t chunksToReadNo = 1;

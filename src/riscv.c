@@ -1,8 +1,8 @@
-#include "Parser.h"
-#include "Memory.h"
-#include "Opcodes.h"
-#include "Functions.h"
-#include "Debug.h"
+#include "../inc/Parser.h"
+#include "../inc/Memory.h"
+#include "../inc/Opcodes.h"
+#include "../inc/Functions.h"
+#include "../inc/Debug.h"
 
 int main()
 {
