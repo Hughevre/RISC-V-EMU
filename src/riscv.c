@@ -1,7 +1,7 @@
 #include "../inc/Parser.h"
 #include "../inc/Memory.h"
 #include "../inc/Opcodes.h"
-#include "../inc/Functions.h"
+#include "../inc/Instructions.h"
 #include "../inc/Debug.h"
 
 int main()
