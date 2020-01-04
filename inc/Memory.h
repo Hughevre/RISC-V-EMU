@@ -65,6 +65,8 @@ void		resetFlag();
 Byte		getRS1();
 Byte		getRS2();
 Byte		getRD();
+DWord 		ord(uint8_t, uint8_t, uint8_t);
+DWord 		ordSign(uint8_t, uint8_t, uint8_t);
 
 Byte		getOpCode(DWord);
 Byte		getFunct3(DWord);

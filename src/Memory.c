@@ -90,6 +90,19 @@ Byte getRD() {
 	return (loadCodeWord(getPC()) & 0x00000F80) >> 7;
 }
 
+DWord ord(uint8_t from, uint8_t length, uint8_t to) {
+	if(length < 1)
+		length = 1;
+	return ((loadCodeWord(getPC()) >> from) & ((1 << length) - 1)) << to;
+}
+
+DWord ordSign(uint8_t from, uint8_t length, uint8_t to) {
+	if(length < 1)
+		length = 1;
+	return ( ((loadCodeWord(getPC()) >> from)	&	(1 << (length - 1) - 1) ) << to) \
+		 - ( ((loadCodeWord(getPC()) >> from) 	& 	(1 << (length - 1))		) << to);
+}
+
 Byte getOpCode(DWord comm) {
 	return comm & 0x0000007F;
 }
