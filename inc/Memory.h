@@ -16,6 +16,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "MErrors.h"
 #include "Parser.h"
 #include "Debug.h"

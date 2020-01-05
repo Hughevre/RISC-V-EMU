@@ -4,6 +4,10 @@
 #include "../inc/Instructions.h"
 #include "../inc/Debug.h"
 
+void test();
+
+//TODO: Zastanowić się nad konstrucją 'switch'
+
 int main()
 {
 	readMemory("file_code.bin", &g_codeSpace, sizeof(g_codeSpace)); //  ..\\tests\\file_code.bin
@@ -23,7 +27,7 @@ int main()
 					ADDI();
 					break;
 				default:
-					printError("");
+					printError("");	//TODO: Błędy dla nieznanych opcode'ów
 					return -1;
 				}
 				break;
@@ -37,7 +41,7 @@ int main()
 				break;
 
 			case ID_OP:
-				switch (getFunct3(inst) && getFunct7(inst)) {       
+				switch (getFunct3(inst) + getFunct7(inst)) {
 				case ID_XOR:
 					XOR();
 					break;

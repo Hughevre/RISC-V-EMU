@@ -46,7 +46,7 @@ Address getPC() {
 }
 
 void setPC(Address addr) {
-	//Problem do przemyślenia - jak zabezpieczyć tę funkcję przed podaniem adresu spzoa zakresu 2^32?
+	//TODO: Problem do przemyślenia - jak zabezpieczyć tę funkcję przed podaniem adresu spzoa zakresu 2^32?
 	//https://www.linuxquestions.org/questions/programming-9/c-how-to-check-the-overflow-flag-930420/ 
 	reg.PC = addr;
 }
