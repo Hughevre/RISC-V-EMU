@@ -89,7 +89,7 @@ void JALR() {
 	}
 	
 	setRegister(rd, getPC() + 1);
-	setPC(getPC() + ((rd + imm) & 0xFFFFFFFE) / 4);
+	setPC((getRegister(rs1) + imm / 4) & 0xFFFFFFFE);
 }
 
 void BEQ() {
