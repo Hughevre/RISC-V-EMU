@@ -100,8 +100,8 @@ int main()
 
 			default:
 				printError("Found unsupported instruction (PC=0x%08lx, T=0x%08lx)\r\n", getPC(), inst);
-				saveMemory("..\\tests\\file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
-				saveMemory("..\\tests\\file_reg_out.bin", &reg, sizeof(reg));
+				saveMemory("../tests/file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
+				saveMemory("../tests/file_reg_out.bin", &reg, sizeof(reg));
 				return -1;
 				break;
 		}

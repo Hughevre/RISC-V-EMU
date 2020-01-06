@@ -8,8 +8,8 @@
 #define ID_JAL                  0b1101111
 #define ID_JALR                 0b1100111
 #define ID_BRANCH               0b1100011     //BEQ
-#define ID_LOAD                 0b0111111     //LW
-#define ID_STORE                0b0000011     //SW, SB
+#define ID_LOAD                 0b0000011     //LW
+#define ID_STORE                0b0100011     //SW, SB
 
 
 /* funct3 & 7 codes */

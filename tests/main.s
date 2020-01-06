@@ -6,7 +6,6 @@
 	.type	main, @function
 
 _start:	
-	lui	a4,11
 	call	subroutine
 	j	main
 
@@ -15,10 +14,8 @@ main:
 	mv	a5,a0
 	nop
 petla1:
-	lw	a5,-20(s0)
-	jal 	a1,0x0
-	beq	a1,a5,main
-	addi	a5,a5,1
+	lw	a5,-20(s0)	
+	addiw	a5,a5,1
 	sw	a5,-20(s0)
 	j	petla1
 

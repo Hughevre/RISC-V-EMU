@@ -89,7 +89,7 @@ void JALR() {
 	}
 	
 	setRegister(rd, getPC() + 1);
-	setPC((getRegister(rs1) + imm / 4) & 0xFFFFFFFE);
+	setPC(getRegister(rs1) + ((imm / 4) & 0xFFFFFFFE));
 }
 
 void BEQ() {
@@ -110,7 +110,7 @@ void BEQ() {
 		incPC();
 
 }
-
+//TODO: Wczytywanie z pamięci i zapis do niej
 void LW() {
 	SDWord	imm = ordSign(20, 12, 0);     			// imm[11:0] sign-extended
 	Byte	rs1 = getRS1();

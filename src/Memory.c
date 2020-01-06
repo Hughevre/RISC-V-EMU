@@ -64,7 +64,7 @@ SDWord getRegister(Byte n) {
 }
 
 void setRegister(Byte n, SDWord value) {
-	if (n > REGISTERS_NO)
+	if (n > REGISTERS_NO || n == 0)
 		throwMemoryException(INVALID_REGISTER_SET, n);
 	reg.rX[n] = value;
 }
@@ -91,13 +91,13 @@ Byte getRD() {
 }
 
 DWord ord(uint8_t from, uint8_t length, uint8_t to) {
-	if(length < 1)
+	if (length < 1)
 		length = 1;
 	return ((loadCodeWord(getPC()) >> from) & ((1 << length) - 1)) << to;
 }
 
 DWord ordSign(uint8_t from, uint8_t length, uint8_t to) {
-	if(length < 1)
+	if (length < 1)
 		length = 1;
 	return ( ((loadCodeWord(getPC()) >> from)	&	(1 << (length - 1) - 1) ) << to) \
 		 - ( ((loadCodeWord(getPC()) >> from) 	& 	(1 << (length - 1))		) << to);
@@ -108,9 +108,9 @@ Byte getOpCode(DWord comm) {
 }
 
 Byte getFunct3(DWord comm) {
-	return comm & 0x00007000;
+	return (comm & 0x00007000) >> 12;
 }
 
 Byte getFunct7(DWord comm) {
-	return comm & 0xFE000000;
+	return (comm & 0xFE000000) >> 25;
 }
