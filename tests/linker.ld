@@ -1,13 +1,12 @@
 /*
  *  TODO: Zapytać o .riscv.attributes
- *  TODO: Gdzie są rejestry...
  */
 
 
 MEMORY
 {
-  text   (rx)   : ORIGIN = 0x000000, LENGTH = 0x00ffff
-  data   (rw!x) : ORIGIN = 0x010000, LENGTH = 0x00ffff
+  text   (rx)   : ORIGIN = 0x000000, LENGTH = 0x008000
+  data   (rw!x) : ORIGIN = 0x00A000, LENGTH = 0x00E000
   .riscv.attributes (r) : ORIGIN = 0x030000, LENGTH = 0x00ffff 
 }
 
