@@ -17,11 +17,11 @@ typedef enum debug_verbose_level_t {
     DEBUG       = 3
 }DebugVerboseLevel;
 
-static int8_t RF			= 0;
-static int8_t debugLevel[7]	= { -3,-2,-1,0,1,2,3 };
+extern int8_t RF;
+extern int8_t debugLevel[7];
 
 void	setDebugLevel(DebugVerboseLevel);
-int		printError(const char*, ...);
+int	printError(const char*, ...);
 bool	isDebugLevelAbove(DebugVerboseLevel);
 
 #endif 

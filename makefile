@@ -38,6 +38,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 .PHONY: clean
 clean:
 	@echo "Cleaning: ${BIN_DIR} ${OBJ_DIR} ${TESTS_DIR}"
-	@rm -rf $(OBJ_DIR)/*.o $(OBJ_DIR)/*.d $(BIN_DIR)/*.out
+	@rm -rf $(OBJ_DIR)/*.o $(OBJ_DIR)/*.d $(BIN_DIR)
 	@$(TESTS_MAKE) clean
 
