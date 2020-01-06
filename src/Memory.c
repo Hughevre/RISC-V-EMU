@@ -5,7 +5,7 @@ SDWord	g_dataSpace[DATA_SIZE];
 Registers reg;
 
 void throwMemoryException(DWord i, DWord j) {
-	printError("ERROR code: 0x%08lx with arg. 0x%08lx at PC=0x%08lx\r\n", i, j, getPC());
+	printError("**** ERROR code: 0x%08lx with arg. 0x%08lx at PC=0x%08lx ****\r\n", i, j, getPC());
 	saveMemory("file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
 	saveMemory("file_reg_out.bin", &reg, sizeof(reg));
 	exit(-1);

@@ -6,15 +6,13 @@
 
 void test();
 
-//TODO: Zastanowić się nad konstrucją 'switch'
-
 int main()
 {
-	readMemory("file_code.bin", &g_codeSpace, sizeof(g_codeSpace)); //  ..\\tests\\file_code.bin
-	readMemory("file_data_in.bin", &g_dataSpace, sizeof(g_dataSpace)); //   ..\\tests\\file_data_in.bin
-	readMemory("file_reg_in.bin", &reg, sizeof(reg)); // ..\\tests\\
-
 	setDebugLevel(TRACE);
+
+	readMemory("..\\tests\\file_code.bin", &g_codeSpace, sizeof(g_codeSpace));
+	readMemory("..\\tests\\file_data_in.bin", &g_dataSpace, sizeof(g_dataSpace));
+	readMemory("..\\tests\\file_reg_in.bin", &reg, sizeof(reg));
 
 	DWord inst;
 	setPC(0x00000000);
@@ -27,8 +25,8 @@ int main()
 					ADDI();
 					break;
 				default:
-					printError("");	//TODO: Błędy dla nieznanych opcode'ów
-					return -1;
+					printError("**** Found unsupported subinstruction (PC=0x%08lx, INST=0x%08lx, FUNCT3=0x%04lx) ****\r\n", getPC(), inst, getFunct3(inst));
+					goto error;
 				}
 				break;
 
@@ -49,8 +47,8 @@ int main()
 					SLTU();
 					break;
 				default:
-					printError("");
-					return -1;
+					printError("**** Found unsupported subinstruction (PC=0x%08lx, INST=0x%08lx, FUNCT3=0x%04lx) ****\r\n", getPC(), inst, getFunct3(inst));
+					goto error;
 				}
 				break;
 
@@ -68,8 +66,8 @@ int main()
 					BEQ();
 					break;
 				default:
-					printError("");
-					return -1;
+					printError("**** Found unsupported subinstruction (PC=0x%08lx, INST=0x%08lx, FUNCT3=0x%04lx) ****\r\n", getPC(), inst, getFunct3(inst));
+					goto error;
 				}
 				break;
 
@@ -79,8 +77,8 @@ int main()
 					LW();
 					break;
 				default:
-					printError("");
-					return -1;
+					printError("**** Found unsupported subinstruction (PC=0x%08lx, INST=0x%08lx, FUNCT3=0x%04lx) ****\r\n", getPC(), inst, getFunct3(inst));
+					goto error;
 				}
 				break;
 
@@ -93,19 +91,21 @@ int main()
 					SB();
 					break;
 				default:
-					printError("");
-					return -1;
+					printError("**** Found unsupported subinstruction (PC=0x%08lx, INST=0x%08lx, FUNCT3=0x%04lx) ****\r\n", getPC(), inst, getFunct3(inst));
+					goto error;
 				}
 				break;
 
 			default:
-				printError("Found unsupported instruction (PC=0x%08lx, T=0x%08lx)\r\n", getPC(), inst);
-				saveMemory("../tests/file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
-				saveMemory("../tests/file_reg_out.bin", &reg, sizeof(reg));
-				return -1;
-				break;
+				printError("Found unsupported instruction (PC=0x%08lx, INST=0x%08lx)\r\n", getPC(), inst);
+				goto error;
 		}
 	}
+
+	error:
+		saveMemory("../tests/file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
+		saveMemory("../tests/file_reg_out.bin", &reg, sizeof(reg));
+		return -1;
 
 	return 0;
 }
