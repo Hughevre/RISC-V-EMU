@@ -7,7 +7,7 @@ Registers reg;
 void throwMemoryException(DWord i, DWord j) {
 	printError("**** ERROR code: 0x%08lx with arg. 0x%08lx at PC=0x%08lx ****\r\n", i, j, getPC());
 	saveMemory("file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
-	saveMemory("file_reg_out.bin", &reg, sizeof(reg));
+	saveMemory("file_reg_out.bin", &reg, sizeof(reg.rX));
 	exit(-1);
 }
 
@@ -64,8 +64,9 @@ SDWord getRegister(Byte n) {
 }
 
 void setRegister(Byte n, SDWord value) {
-	if (n > REGISTERS_NO || n == 0)
+	if (n > REGISTERS_NO)
 		throwMemoryException(INVALID_REGISTER_SET, n);
+	printf("Saving %d\t to 0x%08x\n", value, n*8);
 	reg.rX[n] = value;
 }
 
@@ -99,8 +100,8 @@ DWord ord(uint8_t from, uint8_t length, uint8_t to) {
 DWord ordSign(uint8_t from, uint8_t length, uint8_t to) {
 	if (length < 1)
 		length = 1;
-	return ( ((loadCodeWord(getPC()) >> from)	&	(1 << (length - 1) - 1) ) << to) \
-		 - ( ((loadCodeWord(getPC()) >> from) 	& 	(1 << (length - 1))		) << to);
+	return ( ((loadCodeWord(getPC()) >> from)	&	((1 << (length - 1)) - 1))	<< to) \
+		 - ( ((loadCodeWord(getPC()) >> from) 	&	 (1 << (length - 1))	)	<< to);
 }
 
 Byte getOpCode(DWord comm) {

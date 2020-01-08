@@ -118,6 +118,9 @@ void LW() {
 
 	printf("0x%08x: LW RD:%d, RS1:%d, IMM:%d\n", getPC(), rd, rs1, imm);
 
+	if (rd == 0)
+		printf("Warning: Loading data to register x0");
+
 	Address addr = imm + getRegister(rs1);
 
 	setRegister(rd, loadDataWord(addr));

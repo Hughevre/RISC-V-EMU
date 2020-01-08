@@ -4,15 +4,17 @@
 #include "../inc/Instructions.h"
 #include "../inc/Debug.h"
 
-void test();
-
 int main()
 {
 	setDebugLevel(TRACE);
 
-	readMemory("..\\tests\\file_code.bin", &g_codeSpace, sizeof(g_codeSpace));
-	readMemory("..\\tests\\file_data_in.bin", &g_dataSpace, sizeof(g_dataSpace));
-	readMemory("..\\tests\\file_reg_in.bin", &reg, sizeof(reg));
+	readMemory("file_code.bin", &g_codeSpace, sizeof(g_codeSpace));
+	readMemory("file_data_in.bin", &g_dataSpace, sizeof(g_dataSpace));
+	readMemory("file_reg_in.bin", &reg, sizeof(reg.rX));
+
+	for(int i=0; i<20; i++){
+		printf("%#x\n",g_dataSpace[i]);
+	}
 
 	DWord inst;
 	setPC(0x00000000);
@@ -103,9 +105,11 @@ int main()
 	}
 
 	error:
-		saveMemory("../tests/file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
-		saveMemory("../tests/file_reg_out.bin", &reg, sizeof(reg));
+		saveMemory("file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
+		saveMemory("file_reg_out.bin", &reg, sizeof(reg.rX));
 		return -1;
 
+	saveMemory("file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
+	saveMemory("file_reg_out.bin", &reg, sizeof(reg.rX));
 	return 0;
 }

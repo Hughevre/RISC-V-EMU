@@ -33,11 +33,22 @@ $(BIN_DIR)/$(TARGET): $(OBJS)
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(call MKDIR,$(@D))
 	$(CC) -c $(CFLAGS) -MMD $< -o $@
+
+# Generator plików wejściowych
+.PHONY: inputs
+inputs:
+	$(TESTS_MAKE)
 
 .PHONY: clean
 clean:
 	@echo "Cleaning: ${BIN_DIR} ${OBJ_DIR} ${TESTS_DIR}"
-	@rm -rf $(OBJ_DIR)/*.o $(OBJ_DIR)/*.d $(BIN_DIR)
+	@rm -rf $(OBJ_DIR)/*	\
+			$(BIN_DIR)/*
 	@$(TESTS_MAKE) clean
 
+.PHONY: clean-all
+clean-all: clean
+	@rm -rf $(OBJ_DIR)	\
+			$(BIN_DIR)

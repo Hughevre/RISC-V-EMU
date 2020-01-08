@@ -17,4 +17,6 @@ ${GOBJDUMP} -DxS test > test.lst
 ${GREADELF} -a test >test_elf.lst
 ${GOBJCOPY} -j ".text" -O binary test ${BIN_PATH}/file_code.bin
 ${GOBJCOPY} -j ".data" -O binary test ${BIN_PATH}/file_data_in.bin
-# TODO: Stan rejestrów (file_reg_in.bin)
+
+
+#TODO: Ważne: Przepisać do makefile
