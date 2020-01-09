@@ -33,7 +33,6 @@ DWord loadCodeWord(Address addr) {
 SDWord loadDataWord(Address addr) {
 	if (!isDataAddressInRange(addr))
 		throwMemoryException(OUT_OF_DATA_MEMORY_SPACE_ERROR, addr);
-	printf("%08x\n", addr);
 	addr -= DATA_BASE;
 	return g_dataSpace[addr / 4];
 }
