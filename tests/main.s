@@ -14,15 +14,17 @@ main:
 	mv	a5,a0
 	nop
 petla1:
-	lw	a5,-20(s0)	
-	addiw	a5,a5,1
-	sw	a5,-20(s0)
-	j	petla1
+	lw	a5, mdata	
+	addi	a5,a5,1
+	auipc	a4,0xa
+	sw	a5, -32(a4)
+	j	koniec
 
 subroutine:
 	nop
 	ret
 
+koniec:
 
 /* dane aplikacji */
 /* zmienna, wstepnie zadeklarowana typu char[] */

@@ -24,12 +24,12 @@ TESTS_MAKE = make -sC $(TESTS_DIR)
 
 MKDIR = $(shell [[ -d $(1) ]] || mkdir -p $(1))
 
+all: $(BIN_DIR)/$(TARGET) inputs
 
 $(BIN_DIR)/$(TARGET): $(OBJS)
+	@echo "> Making: $(TARGET)"
 	$(call MKDIR,$(@D))
 	$(CC) $(CFLAGS) $^ -o $@
-	$(TESTS_MAKE)
-
 
 -include $(DEPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -43,12 +43,13 @@ inputs:
 
 .PHONY: clean
 clean:
-	@echo "Cleaning: ${BIN_DIR} ${OBJ_DIR} ${TESTS_DIR}"
+	@echo "> Cleaning: ${BIN_DIR} ${OBJ_DIR} ${TESTS_DIR}"
 	@rm -rf $(OBJ_DIR)/*	\
 			$(BIN_DIR)/*
 	@$(TESTS_MAKE) clean
 
 .PHONY: clean-all
 clean-all: clean
+	@echo "> Removing dirs: ${BIN_DIR} ${OBJ_DIR}"
 	@rm -rf $(OBJ_DIR)	\
 			$(BIN_DIR)

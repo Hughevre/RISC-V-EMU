@@ -21,12 +21,18 @@
 #include "Parser.h"
 #include "Debug.h"
 
+#define FILE_CODE 		"file_code.bin"
+#define FILE_DATA_IN 	"file_data_in.bin"
+#define FILE_REG_IN 	"file_reg_in.bin"
+#define FILE_DATA_OUT	"file_data_out.bin"
+#define FILE_REG_OUT	"file_reg_out.bin"
+
 #define CODE_BASE		0x0000
-#define CODE_TOP		0x8000
+#define CODE_TOP		CODE_BASE + 0x8000
 #define CODE_SIZE		((CODE_TOP-CODE_BASE)/4)
 
 #define DATA_BASE		0xA000
-#define DATA_TOP		0xE000
+#define DATA_TOP		DATA_BASE + 0xE000
 #define DATA_SIZE		((DATA_TOP-DATA_BASE)/4)
 
 #define REGISTERS_NO	31

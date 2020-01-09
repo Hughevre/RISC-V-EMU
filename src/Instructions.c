@@ -67,13 +67,13 @@ void JAL() {
 
 	printf("0x%08x: JAL RD:%d, IMM:%d\n", getPC(), rd, imm);
 
-	if(imm & 0x2) {
-		printError("");								// ADRESS_MISALIGNED
+	if ((getPC() + imm) & 0x2) {
+		printError(ERR_INSTRUCTION_ADRESS_MISALIGNED, getPC(), loadCodeWord(getPC()), imm);	// ADRESS_MISALIGNED
 		return;
 	}
 
-	setRegister(rd, getPC() + 1);     				// pc + 4 Bytes
-	setPC(getPC() + (imm / 4));
+	setRegister(rd, getPC() + 4);     				// pc + 4 Bytes
+	setPC(getPC() + imm);
 }
 
 void JALR() {
@@ -83,13 +83,13 @@ void JALR() {
 
 	printf("0x%08x: JALR RD:%d, RS1:%d, IMM:%d\n", getPC(), rd, rs1, imm);
 
-	if(imm & 0x2) {
-		printError("");								// ADRESS_MISALIGNED
+	if ((getRegister(rs1) + imm) & 0x2) {
+		printError(ERR_INSTRUCTION_ADRESS_MISALIGNED, getPC(), loadCodeWord(getPC()), imm);	// ADRESS_MISALIGNED
 		return;
 	}
 	
-	setRegister(rd, getPC() + 1);
-	setPC(getRegister(rs1) + ((imm / 4) & 0xFFFFFFFE));
+	setRegister(rd, getPC() + 4);
+	setPC((getRegister(rs1) + imm) & 0xFFFFFFFE);
 }
 
 void BEQ() {
@@ -99,18 +99,18 @@ void BEQ() {
 
 	printf("0x%08x: BEQ RS1:%d, RS2:%d, IMM%d\n", getPC(), rs1, rs2, imm);
 
-	if(imm & 0x2) {
-		printError("");								// ADRESS_MISALIGNED
+	if ((getPC() + imm) & 0x2) {
+		printError(ERR_INSTRUCTION_ADRESS_MISALIGNED, getPC(), loadCodeWord(getPC()), imm);	// ADRESS_MISALIGNED
 		return;
 	}
 	
 	if (getRegister(rs1) == getRegister(rs2))
-		setPC(getPC() + imm / 4);
+		setPC(getPC() + imm);
 	else
 		incPC();
 
 }
-//TODO: Wczytywanie z pamięci i zapis do niej
+
 void LW() {
 	SDWord	imm = ordSign(20, 12, 0);     			// imm[11:0] sign-extended
 	Byte	rs1 = getRS1();

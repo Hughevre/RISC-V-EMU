@@ -3,19 +3,19 @@
 #include <stdint.h>
 
 int err(char *message) {
-    printf("%s",message);
+    printf("%s\n",message);
     return -1;
 }
 
-int main(int argc, char** argv) {
-    if(argc == 1)
-        return err("Nie podano nazwy pliku wyjściowego.\n");
+int main(int argc, char **argv) {
+    if (argc == 1)
+        return err("Name of the output file not given.");
 
-    uint32_t reg[32] = {0};
+    uint32_t reg[34] = {0};     //32 registers + 1 PC + 1 flags
 
     FILE *fp = fopen(argv[1], "wb");
     if (fp == NULL)
-        return err("Problem z plikiem. Czy podano poprawną ścieżkę?\n");
+        return err("An error occurred. Please verify that the correct path was given.");
 
     size_t regSize = sizeof(*reg);
     size_t regCount = sizeof(reg)/regSize;

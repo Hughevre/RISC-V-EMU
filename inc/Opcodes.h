@@ -12,7 +12,7 @@
 #define ID_STORE                0b0100011     //SW, SB
 
 
-/* funct3 & 7 codes */
+/* funct3 codes */
 #define ID_ADDI                 0b0000		  //OP-IMM
 
 #define ID_XOR                  0b0100		  //OP

@@ -6,8 +6,8 @@ Registers reg;
 
 void throwMemoryException(DWord i, DWord j) {
 	printError("**** ERROR code: 0x%08lx with arg. 0x%08lx at PC=0x%08lx ****\r\n", i, j, getPC());
-	saveMemory("file_data_out.bin", &g_dataSpace, sizeof(g_dataSpace));
-	saveMemory("file_reg_out.bin", &reg, sizeof(reg.rX));
+	saveMemory(FILE_DATA_OUT, &g_dataSpace, sizeof(g_dataSpace));
+	saveMemory(FILE_REG_OUT, &reg, sizeof(reg));
 	exit(-1);
 }
 
@@ -26,19 +26,23 @@ bool isDataAddressInRange(Address addr) {
 DWord loadCodeWord(Address addr) {
 	if (!isCodeAddressInRange(addr))
 		throwMemoryException(OUT_OF_CODE_MEMORY_SPACE_ERROR, addr);
-	return g_codeSpace[addr];
+	addr -= CODE_BASE;
+	return g_codeSpace[addr / 4];
 }
 
 SDWord loadDataWord(Address addr) {
 	if (!isDataAddressInRange(addr))
 		throwMemoryException(OUT_OF_DATA_MEMORY_SPACE_ERROR, addr);
-	return g_dataSpace[addr];
+	printf("%08x\n", addr);
+	addr -= DATA_BASE;
+	return g_dataSpace[addr / 4];
 }
 
 void storeDataWord(Address addr, SDWord val) {
 	if (!isDataAddressInRange(addr))
 		throwMemoryException(OUT_OF_DATA_MEMORY_SPACE_ERROR, addr);
-	g_dataSpace[addr] = val;
+	addr -= DATA_BASE;
+	g_dataSpace[addr / 4] = val;
 }
 
 Address getPC() {
@@ -46,15 +50,16 @@ Address getPC() {
 }
 
 void setPC(Address addr) {
-	//TODO: Problem do przemyślenia - jak zabezpieczyć tę funkcję przed podaniem adresu spzoa zakresu 2^32?
+	//Problem do przemyślenia - jak zabezpieczyć tę funkcję przed podaniem adresu spzoa zakresu 2^32?
 	//https://www.linuxquestions.org/questions/programming-9/c-how-to-check-the-overflow-flag-930420/ 
+	//Odp.: "Accordingly, memory address computations done by the hardware ignore overflow and instead wrap around modulo 2^XLEN."
 	reg.PC = addr;
 }
 
 void incPC() {
 	if (reg.PC == CODE_TOP)
 		throwMemoryException(INSTRUCTION_POINTER_OVERFLOW, reg.PC);
-	reg.PC += 1;
+	reg.PC += 4;
 }
 
 SDWord getRegister(Byte n) {
@@ -64,9 +69,10 @@ SDWord getRegister(Byte n) {
 }
 
 void setRegister(Byte n, SDWord value) {
+	if (n == 0)			// x0 cannot be changed
+		return;
 	if (n > REGISTERS_NO)
 		throwMemoryException(INVALID_REGISTER_SET, n);
-	printf("Saving %d\t to 0x%08x\n", value, n*8);
 	reg.rX[n] = value;
 }
 

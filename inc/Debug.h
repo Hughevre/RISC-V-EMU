@@ -7,6 +7,8 @@
 #include <stdarg.h>
 #include <stdbool.h>
 
+#define FILE_DEBUG "debug.txt"
+
 typedef enum debug_verbose_level_t {
     NONE        = -3,
     CRITICAL    = -2,
@@ -18,10 +20,9 @@ typedef enum debug_verbose_level_t {
 }DebugVerboseLevel;
 
 extern int8_t RF;
-extern int8_t debugLevel[7];
 
 void	setDebugLevel(DebugVerboseLevel);
-int	printError(const char*, ...);
+int	    printError(const char*, ...);
 bool	isDebugLevelAbove(DebugVerboseLevel);
 
 #endif 

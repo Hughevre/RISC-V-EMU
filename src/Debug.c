@@ -1,16 +1,16 @@
 #include "../inc/Debug.h"
 
 int8_t RF 		= 0;
-int8_t debugLevel[7] 	= {-3,-2,-1,0,1,2,3};
 
 void setDebugLevel(DebugVerboseLevel level) {
 	RF = level;
+	remove(FILE_DEBUG);
 }
 
 int printError(const char *format, ...) {
-	const char *fileName = "debug.txt";
+	const char *fileName = FILE_DEBUG;
 	va_list argsList;
-	FILE *fileHandle = fopen(fileName, "wb");
+	FILE *fileHandle = fopen(fileName, "a");
 
 	if (fileHandle == NULL)
 		return EIO;
@@ -24,7 +24,7 @@ int printError(const char *format, ...) {
 }
 
 bool isDebugLevelAbove(DebugVerboseLevel level) {
-	if (debugLevel[RF] <= level)
+	if (RF <= level)
 		return false;
 	return true;
 }
