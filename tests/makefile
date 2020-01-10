@@ -32,10 +32,11 @@ all: $(OBJS) inputs
 	@echo "> Making: $(REG_GEN).out"
 	gcc $(REG_GEN).c -o $(REG_GEN).out
 
+# https://www.sifive.com/blog/all-aboard-part-1-compiler-args
 %.o: %.s linker.ld
 	@echo "> Making: $@ "
-	${GAS} $< -o $@
-	${GLD} ${LD_OPTIONS} -T linker.ld $@ -o $(TARGET)
+	${GAS} $< -o $@ -march=rv32i -mabi=ilp32
+	${GLD} ${LD_OPTIONS} -T linker.ld $@ -o $(TARGET) -march=rv32i -melf32lriscv
 	${GOBJDUMP} -DxS $(TARGET) > $(TARGET).lst
 	${GREADELF} -a $(TARGET) > $(TARGET)_elf.lst
 

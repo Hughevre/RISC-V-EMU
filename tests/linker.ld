@@ -1,5 +1,6 @@
 /*
- *  TODO: Zapytać o .riscv.attributes
+ *  Na temat .riscv.attributes:
+ *  https://github.com/kito-cheng/riscv-elf-psabi-doc/blob/attr-sections/riscv-elf.md
  */
 
 

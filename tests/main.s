@@ -4,6 +4,7 @@
 	.globl _start
 	.globl	main
 	.type	main, @function
+	# .attribute arch, "rv32i" <- inny sposób ustawienia architektury
 
 _start:	
 	call	subroutine
