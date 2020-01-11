@@ -19,10 +19,10 @@ endif
 
 MPATH 	 =	/home/hubert/RISC-V/bin
 GAS		 =	${MPATH}/riscv64-unknown-elf-as$(PLATFORM_BIN)
-GLD		 =	${MPATH}/riscv64-unknown-elf-ld
-GOBJDUMP =	${MPATH}/riscv64-unknown-elf-objdump
-GOBJCOPY =	${MPATH}/riscv64-unknown-elf-objcopy
-GREADELF =	${MPATH}/riscv64-unknown-elf-readelf
+GLD		 =	${MPATH}/riscv64-unknown-elf-ld$(PLATFORM_BIN)
+GOBJDUMP =	${MPATH}/riscv64-unknown-elf-objdump$(PLATFORM_BIN)
+GOBJCOPY =	${MPATH}/riscv64-unknown-elf-objcopy$(PLATFORM_BIN)
+GREADELF =	${MPATH}/riscv64-unknown-elf-readelf$(PLATFORM_BIN)
 
 LD_OPTIONS = -nostartfiles
 TARGET = test
