@@ -20,7 +20,8 @@ DEPS := $(OBJS:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 # 	Kompilacja ./tests
 # ==========================
 TESTS_DIR  = ./tests
-TESTS_MAKE = make -sC $(TESTS_DIR)
+MAKE	   = make
+TESTS_MAKE = $(MAKE) -sC $(TESTS_DIR)
 
 MKDIR = $(shell [[ -d $(1) ]] || mkdir -p $(1))
 
@@ -53,3 +54,4 @@ clean-all: clean
 	@echo "> Removing dirs: ${BIN_DIR} ${OBJ_DIR}"
 	@rm -rf $(OBJ_DIR)	\
 			$(BIN_DIR)
+	cd $(TESTS_DIR) && $(MAKE) clean

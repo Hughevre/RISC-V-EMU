@@ -22,7 +22,7 @@ typedef enum debug_verbose_level_t {
 extern int8_t RF;
 
 void	setDebugLevel(DebugVerboseLevel);
-int	    printError(const char*, ...);
+int	printError(const char*, ...);
 bool	isDebugLevelAbove(DebugVerboseLevel);
 
 #endif 

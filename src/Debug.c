@@ -24,7 +24,5 @@ int printError(const char *format, ...) {
 }
 
 bool isDebugLevelAbove(DebugVerboseLevel level) {
-	if (RF <= level)
-		return false;
-	return true;
+	return (RF <= level) ? false : true;
 }

@@ -13,17 +13,21 @@ int main()
 	readMemory(FILE_REG_IN, &reg, sizeof(reg));
 
 	DWord inst;
+	Byte funct3;
+	Byte funct7;
 	setPC(0x00000000);
 	for (;;) {
-		inst = loadCodeWord(getPC());
+		inst 	= loadCodeWord(getPC());
+		funct3 	= getFunct3(inst);
+		funct7	= getFunct7(inst);
 		switch (getOpCode(inst)) {
 			case ID_OP_IMM:
-				switch (getFunct3(inst)) {
+				switch (funct3) {
 				case ID_ADDI:
 					ADDI();
 					break;
 				default:
-					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, getFunct3(inst));
+					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, funct3);
 					goto error;
 				}
 				break;
@@ -37,11 +41,11 @@ int main()
 				break;
 
 			case ID_OP:
-				if (getFunct7(inst) != 0) {
-					printError(ERR_UNSUPPORTED_SUBINSTRUCTION7, getPC(), inst, getFunct7(inst));
+				if (funct7 != 0) {
+					printError(ERR_UNSUPPORTED_SUBINSTRUCTION7, getPC(), inst, funct7);
 					goto error;
 				}
-				switch (getFunct3(inst)) {
+				switch (funct3) {
 				case ID_XOR:
 					XOR();
 					break;
@@ -49,7 +53,7 @@ int main()
 					SLTU();
 					break;
 				default:
-					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, getFunct3(inst));
+					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, funct3);
 					goto error;
 				}
 				break;
@@ -63,38 +67,37 @@ int main()
 				break;
 
 			case ID_BRANCH:
-				switch (getFunct3(inst)) {
+				switch (funct3) {
 				case ID_BEQ:
 					BEQ();
 					break;
 				default:
-					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, getFunct3(inst));
+					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, funct3);
 					goto error;
 				}
 				break;
 
 			case ID_LOAD:
-				switch (getFunct3(inst)) {
+				switch (funct3) {
 				case ID_LW:
 					LW();
 					break;
 				default:
-					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, getFunct3(inst));
+					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, funct3);
 					goto error;
 				}
 				break;
 
 			case ID_STORE:
-				switch (getFunct3(inst)) {
+				switch (funct3) {
 				case ID_SW:
-				// goto error;
 					SW();
 					break;
 				case ID_SB:
 					SB();
 					break;
 				default:
-					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, getFunct3(inst));
+					printError(ERR_UNSUPPORTED_SUBINSTRUCTION3, getPC(), inst, funct3);
 					goto error;
 				}
 				break;

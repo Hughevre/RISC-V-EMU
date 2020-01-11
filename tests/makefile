@@ -11,12 +11,18 @@ REG_GEN = reg_gen
 # 	Kompilacja *.s
 # ==========================
 
-MPATH 	 =	/mnt/d/Risc-v/bin
-GAS		 =	${MPATH}/riscv64-unknown-elf-as.exe
-GLD		 =	${MPATH}/riscv64-unknown-elf-ld.exe
-GOBJDUMP =	${MPATH}/riscv64-unknown-elf-objdump.exe
-GOBJCOPY =	${MPATH}/riscv64-unknown-elf-objcopy.exe
-GREADELF =	${MPATH}/riscv64-unknown-elf-readelf.exe
+ifeq ($(OS),WINDOWS_NT)
+	PLATFORM_BIN = .exe
+else
+	PLATFORM_BIN = 
+endif
+
+MPATH 	 =	/home/hubert/RISC-V/bin
+GAS		 =	${MPATH}/riscv64-unknown-elf-as$(PLATFORM_BIN)
+GLD		 =	${MPATH}/riscv64-unknown-elf-ld
+GOBJDUMP =	${MPATH}/riscv64-unknown-elf-objdump
+GOBJCOPY =	${MPATH}/riscv64-unknown-elf-objcopy
+GREADELF =	${MPATH}/riscv64-unknown-elf-readelf
 
 LD_OPTIONS = -nostartfiles
 TARGET = test

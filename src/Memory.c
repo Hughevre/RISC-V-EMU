@@ -49,9 +49,6 @@ Address getPC() {
 }
 
 void setPC(Address addr) {
-	//Problem do przemyślenia - jak zabezpieczyć tę funkcję przed podaniem adresu spzoa zakresu 2^32?
-	//https://www.linuxquestions.org/questions/programming-9/c-how-to-check-the-overflow-flag-930420/ 
-	//Odp.: "Accordingly, memory address computations done by the hardware ignore overflow and instead wrap around modulo 2^XLEN."
 	reg.PC = addr;
 }
 
@@ -76,13 +73,10 @@ void setRegister(Byte n, SDWord value) {
 }
 
 DWord getFlag(DWord val) {
-	if (val > sizeof(DWord))            
+	if (val > sizeof(DWord))
 		throwMemoryException(INVALID_GET_OF_FLAGS_BIT, val);
 	return reg.flags & (1 << val);
 }
-
-//
-//
 
 Byte getRS1() {
 	return (loadCodeWord(getPC()) & 0x000F8000) >> 15;

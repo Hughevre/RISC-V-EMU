@@ -22,10 +22,10 @@
 #include "Debug.h"
 
 #define FILE_CODE 		"file_code.bin"
-#define FILE_DATA_IN 	"file_data_in.bin"
-#define FILE_REG_IN 	"file_reg_in.bin"
-#define FILE_DATA_OUT	"file_data_out.bin"
-#define FILE_REG_OUT	"file_reg_out.bin"
+#define FILE_DATA_IN 		"file_data_in.bin"
+#define FILE_REG_IN 		"file_reg_in.bin"
+#define FILE_DATA_OUT		"file_data_out.bin"
+#define FILE_REG_OUT		"file_reg_out.bin"
 
 #define CODE_BASE		0x0000
 #define CODE_TOP		CODE_BASE + 0x8000
@@ -67,7 +67,7 @@ void		incPC();
 SDWord		getRegister(Byte);
 void		setRegister(Byte, SDWord);
 DWord		getFlag(DWord);
-int			setFlag();
+int		setFlag();
 void		resetFlag();
 Byte		getRS1();
 Byte		getRS2();
