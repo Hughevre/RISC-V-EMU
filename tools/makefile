@@ -43,7 +43,6 @@ OBJS := $(SRCS:.c=)
 OBJS := $(OBJS:.s=.o)
 
 
-
 .PHONY: all
 all: $(OBJS) 
 	@make -s inputs
@@ -76,19 +75,9 @@ inputs: $(BINS)
 	@./$< $(@)
 
 
-
 .PHONY: clean
 clean:
 	@rm -rf	$(addsuffix /*.bin, $(BINS_DIR))	\
 			$(SRCS_DIR)/*.o		\
 			$(SRCS_DIR)/test*	\
 			reg_gen
-
-
-
-
-
-
-
-
-
