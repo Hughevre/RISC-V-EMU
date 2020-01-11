@@ -1,0 +1,6 @@
+*.bin
+*.o
+*.out
+test*
+MAKEVARS
+reg_gen
