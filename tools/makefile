@@ -4,10 +4,10 @@ SHELL:=/bin/bash
 # 	Kompilacja *.s
 # ==========================
 
-# Należy stworzyć plik "MPATH" z zawartością:
+# Należy stworzyć plik "MAKEVARS" z zawartością:
 # MPATH = 'Twoja ścieżka'
 
-include MPATH
+include MAKEVARS
 
 GAS		 :=	${MPATH}/riscv64-unknown-elf-as
 GLD		 :=	${MPATH}/riscv64-unknown-elf-ld
@@ -32,13 +32,13 @@ TARGET_DIR = %
 TARGET := test
 
 SRCS_DIR := ../tests/t_*
-BINS_DIR := $(dir $(wildcard $(SRCS_DIR)/*.s))
+BINS_DIR := $(dir $(shell find $(SRCS_DIR) -name *.s))
 
 BINS = $(addsuffix $(FILE_CODE), $(BINS_DIR)) \
 		$(addsuffix $(FILE_DATA), $(BINS_DIR)) \
 		$(addsuffix $(FILE_REG), $(BINS_DIR))
 
-SRCS := $(wildcard $(SRCS_DIR)/*.s *.c)
+SRCS := $(shell find $(SRCS_DIR) -name *.s) $(wildcard *.c)
 OBJS := $(SRCS:.c=)
 OBJS := $(OBJS:.s=.o)
 
@@ -77,7 +77,9 @@ inputs: $(BINS)
 
 .PHONY: clean
 clean:
-	@rm -rf	$(addsuffix /*.bin, $(BINS_DIR))	\
-			$(SRCS_DIR)/*.o		\
-			$(SRCS_DIR)/test*	\
+	@echo "> Cleaning: ${BINS_DIR} reg_gen"
+	@rm -rf	$(shell find $(BINS_DIR) -name *.bin)		\
+			$(shell find $(SRCS_DIR) -name *.o			\
+								-o 	 -name *debug.txt	\
+								-o	 -name test*)		\
 			reg_gen

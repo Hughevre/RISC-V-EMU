@@ -41,11 +41,11 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 # Generator plików wejściowych
 .PHONY: inputs
 inputs:
-	$(TOOLS_MAKE)
+	@$(TOOLS_MAKE)
 
 .PHONY: clean
 clean:
-	@echo "> Cleaning: ${BIN_DIR} ${OBJ_DIR} ${TOOLS_DIR}"
+	@echo "> Cleaning: ${BIN_DIR} ${OBJ_DIR}"
 	@rm -rf $(OBJ_DIR)/*	\
 			$(BIN_DIR)/*
 	@$(TOOLS_MAKE) clean
@@ -55,4 +55,3 @@ clean-all: clean
 	@echo "> Removing dirs: ${BIN_DIR} ${OBJ_DIR}"
 	@rm -rf $(OBJ_DIR)	\
 			$(BIN_DIR)
-	cd $(TOOLS_DIR) && $(MAKE) clean

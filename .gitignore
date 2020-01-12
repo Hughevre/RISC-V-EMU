@@ -1,7 +1,11 @@
 .vscode/
 bin/
 build/
-debug*
+
+**.bin
+**.o
+**debug.txt
+tests/**/test*
 
 # Created by https://www.gitignore.io/api/c
 # Edit at https://www.gitignore.io/?templates=c

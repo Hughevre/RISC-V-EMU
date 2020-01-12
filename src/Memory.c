@@ -11,6 +11,8 @@ void throwMemoryException(DWord i, DWord j) {
 	exit(-1);
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
 bool isCodeAddressInRange(Address addr) {
 	if (addr < CODE_BASE && addr > CODE_TOP)
 		return false;
@@ -22,6 +24,7 @@ bool isDataAddressInRange(Address addr) {
 		return false;
 	return true;
 }
+#pragma GCC diagnostic pop
 
 DWord loadCodeWord(Address addr) {
 	if (!isCodeAddressInRange(addr))
@@ -59,6 +62,8 @@ void incPC() {
 }
 
 SDWord getRegister(Byte n) {
+	if (n == 0)			// x0 is always set to 0
+		return (SDWord)0;
 	if (n > REGISTERS_NO)
 		throwMemoryException(INVALID_REGISTER_GET, n);
 	return reg.rX[n];
