@@ -9,7 +9,7 @@ then
     do
         (cd ${dir}
         echo "> Running test: ${PWD##*/}"
-        ./../${EXE} > /dev/null)
+        ./../${EXE})
     done
 else
     echo "> ${EXE} not found."

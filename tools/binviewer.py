@@ -13,7 +13,7 @@ buffer = ''
 for i, b in enumerate(content):
     if not i % 8:
         print("{:06x}:".format(i), end=' ')
-        
+
     buffer += "{:04b} ".format(int(b,16))
     # print("{:04b}".format(int(b,16)), end=' ')
     if not (i+1) % 8:

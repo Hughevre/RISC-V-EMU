@@ -67,7 +67,7 @@ void		incPC();
 SDWord		getRegister(Byte);
 void		setRegister(Byte, SDWord);
 DWord		getFlag(DWord);
-int		setFlag();
+int			setFlag();
 void		resetFlag();
 Byte		getRS1();
 Byte		getRS2();
@@ -79,4 +79,4 @@ Byte		getOpCode(DWord);
 Byte		getFunct3(DWord);
 Byte		getFunct7(DWord);
 
-#endif 
+#endif

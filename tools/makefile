@@ -44,7 +44,7 @@ OBJS := $(OBJS:.s=.o)
 
 
 .PHONY: all
-all: $(OBJS) 
+all: $(OBJS)
 	@make -s inputs
 
 %: %.c

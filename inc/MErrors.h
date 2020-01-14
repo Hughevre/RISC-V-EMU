@@ -15,4 +15,4 @@
 #define ERR_UNSUPPORTED_INSTRUCTION         "**** Found unsupported instruction (PC=0x%08lx, INST=0x%08lx) ****\r\n"
 #define ERR_INSTRUCTION_ADRESS_MISALIGNED   "**** Instruction address misaligned (PC=0x%08lx, INST=0x%08lx, IMM=0x%08lx) ****\r\n"
 
-#endif 
+#endif

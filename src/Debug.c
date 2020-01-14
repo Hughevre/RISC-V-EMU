@@ -1,6 +1,6 @@
 #include "../inc/Debug.h"
 
-int8_t RF 		= 0;
+int8_t RF = 0;
 
 void setDebugLevel(DebugVerboseLevel level) {
 	RF = level;

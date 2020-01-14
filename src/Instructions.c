@@ -87,7 +87,7 @@ void JALR() {
 		printError(ERR_INSTRUCTION_ADRESS_MISALIGNED, getPC(), loadCodeWord(getPC()), imm);	// ADRESS_MISALIGNED
 		return;
 	}
-	
+
 	setRegister(rd, getPC() + 4);
 	setPC((getRegister(rs1) + imm) & 0xFFFFFFFE);
 }
@@ -103,7 +103,7 @@ void BEQ() {
 		printError(ERR_INSTRUCTION_ADRESS_MISALIGNED, getPC(), loadCodeWord(getPC()), imm);	// ADRESS_MISALIGNED
 		return;
 	}
-	
+
 	if (getRegister(rs1) == getRegister(rs2))
 		setPC(getPC() + imm);
 	else
@@ -155,5 +155,3 @@ void SB() {
 
 	incPC();
 }
-
-

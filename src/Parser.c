@@ -52,7 +52,7 @@ int readMemory(const char *fileName, void *buffer, size_t size) {
 	if (fp == NULL) {
 		if (isDebugLevelAbove(ERROR))
 			printError("**** Error while opening file: %s ****\n", strerror(errno));
-		return EIO; 
+		return EIO;
 	}
 
 	fseek(fp, 0, SEEK_SET);
@@ -82,5 +82,3 @@ int saveMemory(const char *fileName, void *buffer, size_t size) {
 	fclose(fp);
 	return retval;
 }
-
-
