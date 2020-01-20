@@ -49,7 +49,6 @@ typedef uint32_t	Address;
 typedef struct registers_t {
 	SDWord rX[REGISTERS_NO + 1];
 	DWord  PC;
-	DWord  flags;
 }Registers;
 
 extern DWord	g_codeSpace[CODE_SIZE];
@@ -66,9 +65,6 @@ void		setPC(Address);
 void		incPC();
 SDWord		getRegister(Byte);
 void		setRegister(Byte, SDWord);
-DWord		getFlag(DWord);
-int			setFlag();
-void		resetFlag();
 Byte		getRS1();
 Byte		getRS2();
 Byte		getRD();

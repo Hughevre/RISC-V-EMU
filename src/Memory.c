@@ -77,12 +77,6 @@ void setRegister(Byte n, SDWord value) {
 	reg.rX[n] = value;
 }
 
-DWord getFlag(DWord val) {
-	if (val > sizeof(DWord))
-		throwMemoryException(INVALID_GET_OF_FLAGS_BIT, val);
-	return reg.flags & (1 << val);
-}
-
 Byte getRS1() {
 	return (loadCodeWord(getPC()) & 0x000F8000) >> 15;
 }
