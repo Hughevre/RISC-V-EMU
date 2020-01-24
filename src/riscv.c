@@ -63,6 +63,10 @@ int main()
 				break;
 
 			case ID_JALR:
+				if (funct3 != 0) {
+					printError(ERR_UNSUPPORTED_SUBINSTRUCTION7, getPC(), inst, funct7);
+					goto error;
+				}
 				JALR();
 				break;
 
