@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#define REG_SIZE 33
+
 int err(char *message) {
     printf("%s\n",message);
     return -1;
@@ -11,8 +13,13 @@ int main(int argc, char **argv) {
     if (argc == 1)
         return err("Name of the output file not given.");
 
-    uint32_t reg[33] = {1};     //32 registers + 1 PC
-    reg[0] = 0;			//X0 = 0
+    uint32_t reg[REG_SIZE];     //32 registers + 1 PC
+
+    for(int i=1; i<REG_SIZE; i++) {
+        reg[i] = 0xFFFFFFFF;
+    }
+
+    reg[0] = 0;			        //x0 = 0
 
     FILE *fp = fopen(argv[1], "wb");
     if (fp == NULL)
