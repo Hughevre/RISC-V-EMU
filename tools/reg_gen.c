@@ -11,7 +11,8 @@ int main(int argc, char **argv) {
     if (argc == 1)
         return err("Name of the output file not given.");
 
-    uint32_t reg[33] = {0};     //32 registers + 1 PC
+    uint32_t reg[33] = {1};     //32 registers + 1 PC
+    reg[0] = 0;			//X0 = 0
 
     FILE *fp = fopen(argv[1], "wb");
     if (fp == NULL)

@@ -1,0 +1,9 @@
+Name		Order
+1. LUI, AUIPC	7.
+2. JAL, JALR	5.
+3. BEQ		6.
+4. LW		3.
+5. SB, SW	4.
+6. ADDI		1.
+7. SLTU, XOR	2.
+EOF
