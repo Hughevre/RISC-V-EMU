@@ -21,7 +21,7 @@
 #include "Parser.h"
 #include "Debug.h"
 
-#define FILE_CODE 		"file_code.bin"
+#define FILE_CODE 			"file_code.bin"
 #define FILE_DATA_IN 		"file_data_in.bin"
 #define FILE_REG_IN 		"file_reg_in.bin"
 #define FILE_DATA_OUT		"file_data_out.bin"
@@ -51,6 +51,9 @@ typedef struct registers_t {
 	DWord  PC;
 }Registers;
 
+/*
+MMU has 32 bits long address unit
+*/
 extern DWord	g_codeSpace[CODE_SIZE];
 extern SDWord	g_dataSpace[DATA_SIZE];
 
