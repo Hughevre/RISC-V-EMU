@@ -4,7 +4,7 @@ int readStream(FILE *fp, void *buffer, size_t size) {
 	const uint8_t chunksToReadNo = 1;
 	int chunksReadNo;
 
-	memset(buffer, 1, size);		//Set to one to ease comparing
+	memset(buffer, 0xFFFF, size);		//Set to one to ease comparing
 	chunksReadNo = fread(buffer, size, chunksToReadNo, fp);
 	if (!chunksReadNo) {
 		if (ferror(fp)) {

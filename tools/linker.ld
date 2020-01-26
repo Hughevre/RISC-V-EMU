@@ -6,8 +6,8 @@
 
 MEMORY
 {
-  text   (rx)   : ORIGIN = 0x000000, LENGTH = 0x008000
-  data   (rw!x) : ORIGIN = 0x00A000, LENGTH = 0x00E000
+  text   (rx)   : ORIGIN = 0x000000, LENGTH = 0x000200
+  data   (rw!x) : ORIGIN = 0x00A000, LENGTH = 0x000100
   .riscv.attributes (r) : ORIGIN = 0x030000, LENGTH = 0x00ffff
 }
 

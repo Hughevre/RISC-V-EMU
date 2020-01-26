@@ -2,7 +2,7 @@
 
 void ADDI() {
 	Byte	rs1 = getRS1();
-	SDWord	imm = ordSign(20, 12, 0);				//imm[11:0] sign-extended
+	SDWord	imm = ordSign(20, 12, 0);					// imm[11:0]
 	Byte	rd  = getRD();
 
 	printf("0x%08x: ADDI RD:%d, RS1:%d, IMM:%d\n", getPC(), rd, rs1, imm);
@@ -13,7 +13,7 @@ void ADDI() {
 }
 
 void LUI() {
-	DWord	imm	= ord(12, 20, 12);           		// imm[31:12]
+	DWord	imm	= ordSign(12, 20, 12);           		// imm[31:12]
 	Byte	rd	= getRD();
 
 	printf("0x%08x: LUI RD:%d, IMM:%d\n", getPC(), rd, imm);
@@ -24,7 +24,7 @@ void LUI() {
 }
 
 void AUIPC() {
-	DWord	imm = ord(12, 20, 12);       		  	// imm[31:12]
+	DWord	imm = ordSign(12, 20, 12);       		  	// imm[31:12]
 	Byte	rd	= getRD();
 
 	printf("0x%08x: AUIPC RD:%d, IMM:%d\n", getPC(), rd, imm);
@@ -62,7 +62,7 @@ void SLTU() {
 }
 
 void JAL() {
-	SDWord	imm	= ordSign(31, 1, 20) + ord(21, 10, 1) + ord(20, 1, 11) + ord(12, 8, 12);	// imm[20] imm[10:1] imm[11] imm[19:12] sign-extended
+	SDWord	imm	= ordSign(31, 1, 20) + ord(21, 10, 1) + ord(20, 1, 11) + ord(12, 8, 12);	// imm[20] imm[10:1] imm[11] imm[19:12]
 	Byte	rd	= getRD();
 
 	printf("0x%08x: JAL RD:%d, IMM:%d\n", getPC(), rd, imm);
@@ -72,12 +72,12 @@ void JAL() {
 		return;
 	}
 
-	setRegister(rd, getPC() + 4);     				// pc + 4 Bytes
+	setRegister(rd, getPC() + 4);     				// PC + 4 Bytes
 	setPC(getPC() + imm);
 }
 
 void JALR() {
-	SDWord	imm = ordSign(20, 12, 0);     			// imm[11:0] sign-extended
+	SDWord	imm = ordSign(20, 12, 0);     			// imm[11:0]
 	Byte	rs1	= getRS1();
 	Byte	rd	= getRD();
 
@@ -93,7 +93,7 @@ void JALR() {
 }
 
 void BEQ() {
-	SDWord	imm = ordSign(31, 1, 12) + ord(25, 6, 5) + ord(8, 4, 1) + ord(7, 1, 11);      // imm[12] imm[10:5] imm[4:1] imm[11] sign-extended
+	SDWord	imm = ordSign(31, 1, 12) + ord(25, 6, 5) + ord(8, 4, 1) + ord(7, 1, 11);      // imm[12] imm[10:5] imm[4:1] imm[11]
 	Byte	rs1 = getRS1();
 	Byte	rs2 = getRS2();
 
@@ -112,7 +112,7 @@ void BEQ() {
 }
 
 void LW() {
-	SDWord	imm = ordSign(20, 12, 0);     			// imm[11:0] sign-extended
+	SDWord	imm = ordSign(20, 12, 0);     				// imm[11:0]
 	Byte	rs1 = getRS1();
 	Byte	rd	= getRD();
 
@@ -129,7 +129,7 @@ void LW() {
 }
 
 void SW() {
-	SDWord	imm = ordSign(25, 7, 5) + ord(7, 5, 0);		// imm[11:5] imm[4:0] sign-extended
+	SDWord	imm = ordSign(25, 7, 5) + ord(7, 5, 0);		// imm[11:5] imm[4:0]
 	Byte	rs1 = getRS1();
 	Byte	rs2 = getRS2();
 
@@ -143,7 +143,7 @@ void SW() {
 }
 
 void SB() {
-	SDWord	imm = ordSign(25, 7, 5) + ord(7, 5, 0);		// imm[11:5] imm[4:0] sign-extended
+	SDWord	imm = ordSign(25, 7, 5) + ord(7, 5, 0);		// imm[11:5] imm[4:0]
 	Byte	rs1 = getRS1();
 	Byte	rs2 = getRS2();
 
