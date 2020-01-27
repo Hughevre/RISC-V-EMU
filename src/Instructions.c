@@ -151,7 +151,7 @@ void SB() {
 
 	Address addr = imm + getRegister(rs1);
 
-	storeDataWord(addr, getRegister(rs2) & 0xFF);		// Byte-size
+	storeDataWord(addr, (loadDataWord(addr) & 0xFFFFFF00) + (getRegister(rs2) & 0xFF));		// Byte-size
 
 	incPC();
 }

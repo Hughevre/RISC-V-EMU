@@ -7,7 +7,7 @@
 MEMORY
 {
   text   (rx)   : ORIGIN = 0x000000, LENGTH = 0x000200
-  data   (rw!x) : ORIGIN = 0x00A000, LENGTH = 0x000100
+  data   (rw!x) : ORIGIN = 0x000A00, LENGTH = 0x000100
   .riscv.attributes (r) : ORIGIN = 0x030000, LENGTH = 0x00ffff
 }
 

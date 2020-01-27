@@ -32,16 +32,25 @@ TARGET_DIR = %
 TARGET := test
 
 SRCS_DIR := ../tests/t_*
-BINS_DIR := $(dir $(shell find $(SRCS_DIR) -name *.s))
+BINS_DIR := $(dir $(shell find $(SRCS_DIR) -name '*.s'))
 
 BINS = $(addsuffix $(FILE_CODE), $(BINS_DIR)) \
 		$(addsuffix $(FILE_DATA), $(BINS_DIR)) \
 		$(addsuffix $(FILE_REG), $(BINS_DIR))
 
-SRCS := $(shell find $(SRCS_DIR) -name *.s) $(wildcard *.c)
+SRCS := $(shell find $(SRCS_DIR) -name '*.s') $(wildcard *.c)
 OBJS := $(SRCS:.c=)
 OBJS := $(OBJS:.s=.o)
 
+PYS := $(basename $(shell find $(SRCS_DIR) -name '*.py'))
+
+.PHONY: start
+start: $(PYS)
+	@make -s all
+
+%: %.py
+	@echo "> Generating: $(@)"
+	@cd $(dir $@); python3 $(<F)
 
 .PHONY: all
 all: $(OBJS)
@@ -76,10 +85,11 @@ inputs: $(BINS)
 
 
 .PHONY: clean
+BINS_DIR := $(sort $(dir $(shell find $(SRCS_DIR) -name '*.bin')))
 clean:
 	@echo "> Cleaning: ${BINS_DIR} reg_gen"
-	@rm -rf	$(shell find $(BINS_DIR) -name *.bin)		\
-			$(shell find $(SRCS_DIR) -name *.o			\
-								-o 	 -name *debug.txt	\
-								-o	 -name test*)		\
+	@rm -rf	$(shell find $(BINS_DIR) -name '*.bin')		\
+			$(shell find $(SRCS_DIR) -name '*.o'		\
+								-o 	 -name '*debug.txt'	\
+								-o	 -name 'test*')		\
 			reg_gen

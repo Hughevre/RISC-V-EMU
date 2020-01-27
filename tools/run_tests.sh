@@ -1,7 +1,7 @@
 #!/bin/bash
 
-EXE="../bin/V-RISCV"
-TESTS_DIR=$(ls ../tests/t_*/test | sed 's/\/[^/]*$//')
+EXE=$(pwd)"/../bin/V-RISCV"
+TESTS_DIR=$(find ../tests -name 'test' | sed 's/\/[^/]*$//')
 
 if [[ -e ${EXE} ]]
 then
@@ -9,7 +9,7 @@ then
     do
         (cd ${dir}
         echo "> Running test: ${PWD##*/}"
-        ./../${EXE})
+        ${EXE} > /dev/null)
     done
 else
     echo "> ${EXE} not found."

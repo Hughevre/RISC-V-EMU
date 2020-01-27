@@ -17,7 +17,7 @@ main:
 petla1:
 	lw	a5, mdata	
 	addi	a5,a5,1
-	auipc	a4,0xa
+	auipc	a4,0x1
 	sw	a5, -32(a4)
 	j	koniec
 

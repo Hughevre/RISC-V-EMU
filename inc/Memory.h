@@ -8,7 +8,7 @@
 
 		Data memory size (RAM):						256B
 		Available addresses space for data memory:	256B/4B = 64 = 0x0040
-		Available address space for data memory:	0xA000 - 0xA100
+		Available address space for data memory:	0x0A00 - 0x0B00
 
 		A note about "Address" type size
 		Address type is 32 bits, since the align to the PC register.
@@ -31,7 +31,7 @@
 #define CODE_TOP		CODE_BASE + 0x0200
 #define CODE_SIZE		((CODE_TOP-CODE_BASE)/4)
 
-#define DATA_BASE		0xA000
+#define DATA_BASE		0x0A00
 #define DATA_TOP		DATA_BASE + 0x0100
 #define DATA_SIZE		((DATA_TOP-DATA_BASE)/4)
 
