@@ -9,15 +9,20 @@
 _start:
 	xor a0, a0, a0
 	xor a1, a1, a1
-	addi a0, zero, 20
-	addi a1, zero, 20
-	bne a0, a1, 0
-	addi a0, zero, 20
-# srodek:
-# 	li s0, 1030
-# 	j koniec
+	bne a0, a1, 0x3C
 
-# koniec:
-# 	li s2, 1370
+	addi a0, a0, 2046
+	addi a1, zero, 2046
+	bne a0, a1, 0x3C
+
+	li a0, 0
+	li a1, 0
+	li a2, 0
+	addi a0, zero, -2047
+	addi a1, zero, -2047
+	bne a0, a1, 0x3C
+	j error
+error:
+	xor a2, a0, a1
 
 
