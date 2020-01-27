@@ -1,0 +1,2 @@
+Directory: ../tests/t_AUIPC/AUIPC_test/
+

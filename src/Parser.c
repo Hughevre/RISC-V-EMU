@@ -18,7 +18,6 @@ int readStream(FILE *fp, void *buffer, size_t size) {
 		} else {
 			if (isDebugLevelAbove(ERROR))
 				printError("**** Unknown IO error *****\n");
-			return -1;
 		}
 	}
 

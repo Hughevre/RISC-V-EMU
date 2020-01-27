@@ -4,18 +4,20 @@
 	.globl _start
 	.globl	main
 	.type	main, @function
-	# .attribute arch, "rv32i" <- inny sposób ustawienia architektury
+	.option norelax
 
 _start:
-	li a0, 10
-	li a1, 20
-	beq a0, a1, 4
+	xor a0, a0, a0
+	xor a1, a1, a1
+	addi a0, zero, 20
+	addi a1, zero, 20
+	bne a0, a1, 0
+	addi a0, zero, 20
+# srodek:
+# 	li s0, 1030
+# 	j koniec
 
-srodek:
-	li s0, 1030
-	j koniec
-
-koniec:
-	li s2, 1370
+# koniec:
+# 	li s2, 1370
 
 

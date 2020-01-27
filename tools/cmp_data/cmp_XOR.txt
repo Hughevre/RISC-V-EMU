@@ -1,0 +1,2 @@
+Directory: ../tests/t_XOR/XOR/
+
